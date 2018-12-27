@@ -3,8 +3,8 @@ importScripts( 'js/sw-utils.js' );
 
 
 
-const STATIC_CACHE    = 'static-v3';
-const DINAMIC_CACHE   = 'dinamic-v1';
+const STATIC_CACHE    = 'static-v4';
+const DYNAMIC_CACHE   = 'dynamic-v2';
 const INMUTABLE_CACHE = 'inmutable-v1';
 
 
@@ -55,6 +55,9 @@ self.addEventListener( 'activate', e => {
             cacheNames.map( cacheName => {
                 
                 if ( cacheName !== STATIC_CACHE && cacheName.startsWith( 'static' ) ) {
+                    return caches.delete( cacheName );
+                }
+                if ( cacheName !== DYNAMIC_CACHE && cacheName.startsWith( 'dynamic' ) ) {
                     return caches.delete( cacheName );
                 }
             })
